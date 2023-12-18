@@ -6,10 +6,11 @@ import session from 'express-session'
 import cors from 'cors'
 
 export default class App {
-  constructor(passportConfig, indexRouter, usersRouter) {
+  constructor(passportConfig, indexRouter, usersRouter, offersRouter) {
     this.passport = passportConfig.passport
     this.indexRouter = indexRouter
     this.usersRouter = usersRouter.router
+    this.offersRouter = offersRouter.router
   }
   runApp = async () => {
     const app = express();
@@ -31,6 +32,7 @@ export default class App {
     app.use(this.passport.session());
     app.use('/', this.indexRouter);
     app.use('/users', this.usersRouter);
+    app.use('/offers', this.offersRouter);
 
     // catch 404 and forward to error handler
     app.use(function(req, res, next) {
