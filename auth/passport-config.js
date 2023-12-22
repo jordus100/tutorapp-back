@@ -29,6 +29,13 @@ export default class PassportConfig {
             done(null, user);
         })
 
+        passport.isAuthenticated = (req, res, next) => {
+            if (req.isAuthenticated() && req.user.username) {
+                return next();
+            }
+            res.status(401).json({ message: 'User not logged in' });
+        }
+
         return passport
     }
 
