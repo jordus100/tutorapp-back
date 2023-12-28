@@ -2,7 +2,6 @@ import App from './app.js'
 import PassportConfig from './auth/passport-config.js'
 import DbConnection from './db/db-connection.js'
 import Auth from './auth/auth.js'
-import { router as indexRouter } from './routes/index.js'
 import UsersRouter from "./routes/users.js";
 import UserService from "./services/users.js";
 import OfferService from "./services/offers.js";
@@ -22,4 +21,4 @@ const offersRouter = new OffersRouter(offerService, passport)
 
 const lessonService = new LessonService(dbClient)
 const lessonsRouter = new LessonsRouter(lessonService, passport)
-export const app = new App(passport, indexRouter, usersRouter, offersRouter, lessonsRouter)
+export const app = new App(passport, usersRouter, offersRouter, lessonsRouter)

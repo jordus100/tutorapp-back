@@ -10,6 +10,7 @@ export default class LessonsRouter {
     configRouter = () => {
         this.router.post('/signup', this.passport.isAuthenticated, this.lessonService.signUpForLesson)
         this.router.get('/student', this.passport.isAuthenticated, this.lessonService.getStudentLessons)
+        this.router.post('/student/cancel', this.passport.isAuthenticated, this.lessonService.cancelStudentLesson)
         this.router.get('/tutor', this.passport.isAuthenticated, this.lessonService.getTutorLessons)
     }
 }

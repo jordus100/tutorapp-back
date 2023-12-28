@@ -38,9 +38,18 @@ export default class LessonService {
                     from: 'lessons',
                     localField: '_id',
                     foreignField: 'offerId',
-                    as: 'lesson'
+                    as: 'lessons'
                 } }
             ])
+            .toArray()
+        return res.status(200).json(signups)
+    }
+
+    cancelStudentLesson = async (req, res, next) => {
+        const lessonObjId = new ObjectId(req.body.lessonId)
+        this.dbClient.collection('lessons').deleteOne({ _id: lessonObjId}).then(result => {
+            return res.status(200).json({message: 'Lesson deleted successfully'}) }).catch(err => {
+            return res.status(400).json({message: 'Lesson deletion failed'}) })
     }
 
 }
